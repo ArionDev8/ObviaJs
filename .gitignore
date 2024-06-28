@@ -1,0 +1,16 @@
+js/.DS_Store
+examples/.DS_Store
+.DS_Store
+.vscode/settings.json
+.idea/.name
+.idea/Flower_UI.iml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.vscode/launch.json
+.vscode/taskmarks.json
+examples/Form/upload.php
+.ssync-files.json
+.vscode/sftp.json

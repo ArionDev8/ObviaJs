@@ -1,0 +1,103 @@
+.filter .main-container {
+    width: 20vw;
+}
+
+.filter .main_autocomplete {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.filter .main_autocomplete>div {
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.filter .main_autocomplete>div>input {
+    width: 100% !important;
+}
+
+.filter .repeater>div {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.filter .repeater-container {
+    text-align: left;
+    padding: 4px;
+}
+
+.filter .expression-container {
+    border: 1px solid #5555556b;
+    border-radius: 6px;
+    outline: none;
+}
+
+.filter .expression-container-easy {
+    border-top: 1px solid #5555556b;
+    border-bottom: 1px solid #5555556b;
+    border-left: 1px solid #5555556b;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    outline: none;
+    width: 80%;
+    float: left;
+}
+
+.filter .apply-easy {
+    border: 1px solid #5555556b;
+    border-radius: 6px;
+    outline: none;
+    float: right;
+}
+
+.filter .initial_style.initial_style {
+    width: 160px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.filter .index {
+    background-color: #aeb2b55e;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+}
+
+.filter .close {
+    background-color: #aeb2b55e;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+}
+
+.filter .item-heading {
+    font-size: 16px;
+    color: #1a73e8;
+    margin: 0;
+}
+
+.fall {
+    transform: translateY(2rem) rotateZ(10deg);
+    opacity: 0;
+}
+
+.filter .form-row-easy {
+    display: inline-flex;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.filter .repeater-easy {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+}
+
+.filter .repeater-easy .filter {
+    flex-basis: 0;
+    margin-top: .25rem;
+}

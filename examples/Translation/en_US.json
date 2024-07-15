@@ -1,0 +1,18 @@
+{
+    "locale": "en_US",
+    "sections": {
+        "Forms": {
+            "label": "anglisht",
+            "registerBtn": "Register",
+            "logInBtn": "Log In",
+            "editBtn": "Edit",
+            "name": "Name",
+            "password": "Password",
+            "changePasswordBtn": "Change Password",
+            "changePasswordLabel": "Password Reset",
+            "saveBtn": "Save",
+            "forgotPasswordLink": "Forgot Password",
+            "newPassword": "New Password"
+        }
+    }
+}

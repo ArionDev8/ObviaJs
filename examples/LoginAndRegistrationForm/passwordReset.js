@@ -1,8 +1,33 @@
 import { Button } from "../../components/Button/Button.js"
 import { Container } from "../../components/Container.js"
 import { Label } from "../../components/Label.js";
+import { DropDown } from "../../components/DropDown/DropDown.js"
 import { TextInput } from "../../components/TextInput/TextInput.js"
+import { ArrayEx } from "../../lib/ArrayEx.js"
+import { BrowserManager } from "../../lib/BrowserManager.js";
+import { LocalizationManager } from "../../lib/LocalizationManager.js";
+import { get } from "../../lib/my.js";
 
+
+let Context = {};
+Context.localizationManager = new LocalizationManager({
+    selectedLocale: {
+        displayLanguage: "English",
+        localeString: "en_US",
+    },
+    fetchPromise: function (p) {
+        let fp = get(
+            BrowserManager.getInstance().base +
+            "/obvia/examples/Translation/" +
+            p.localeString +
+            ".json",
+            "application/json"
+        );
+        return fp.then((r) => {
+            return JSON.parse(r.response);
+        });
+    },
+});
 
 let passwordResetForm = new Container({
     id: 'formForPasswordReset',
@@ -14,12 +39,45 @@ let passwordResetForm = new Container({
     },
     components: [
         {
+            ctor: DropDown,
+            props: {
+                id: 'dropdown',
+                css: {
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    backgroundColor: 'white',
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '14px',
+                    width: '30%',
+                    float: 'right', 
+                },
+                valueField: "key",
+                labelField: "title",
+                label: "Choose Language",
+                dataProvider: new ArrayEx([
+
+                    { key: "en_US", title: "English" },
+                    { key: "sq_AL", title: "Shqip" },
+                ]),
+                change: function (e) {  
+                    let key = passwordResetForm.dropdown.selectedItem.key;
+                    
+                    Context.localizationManager.setSelectedLocale({
+						displayLanguage: "Shqip",
+						localeString: key,
+					});
+                }
+            }
+        },
+        {
             ctor: Label,
             props: {
-                label: 'Password Reset',
+                label: "{localizationManager.getLocaleString('Forms','changePasswordLabel',localizationManager.selectedLocale)}",
                 css: {
                     textAlign: 'center',
-                }
+                },
+                bindingDefaultContext: Context,
             }
         },
         {
@@ -28,6 +86,13 @@ let passwordResetForm = new Container({
                 id: 'email',
                 type: 'text',
                 placeholder: 'Email',
+                css: {
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    fontSize: '14px',
+                    width: '100%',
+                }
             }
         },
         {
@@ -35,7 +100,15 @@ let passwordResetForm = new Container({
             props: {
                 id: 'password',
                 type: 'password',
-                placeholder: 'New Password',
+                placeholder: "{localizationManager.getLocaleString('Forms','newPassword',localizationManager.selectedLocale)}",
+                bindingDefaultContext: Context,
+                css: {
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    fontSize: '14px',
+                    width: '100%',
+                }
             }
         },
         {
@@ -43,10 +116,17 @@ let passwordResetForm = new Container({
             props: {
                 id: 'ChangePasswordButton',
                 type: 'button',
-                label: 'Change Password',
+                label: "{localizationManager.getLocaleString('Forms','changePasswordBtn',localizationManager.selectedLocale)}",
                 css: {
-                    height: 50,
-                    width: 150,
+                    padding: '10px',
+                    border: 'none',
+                    borderRadius: '5px',
+                    backgroundColor: '#008CBA',
+                    color: 'white',
+                    fontSize: '16px',
+                    cursor: 'pointer',
+                    width: '100%',
+                    height: '50px',
                 },
                 click: function () {
                     let email = passwordResetForm.email.value;
@@ -64,7 +144,8 @@ let passwordResetForm = new Container({
                     } else {
                         console.log("User not found or failed to change password");
                     }
-                }
+                },
+                bindingDefaultContext: Context,
             }
         }
     ]

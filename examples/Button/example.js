@@ -7,13 +7,13 @@ import { get } from "../../lib/my.js";
 let Context = {};
 Context.localizationManager = new LocalizationManager({
 	selectedLocale: {
-		displayLanguage: "English",
-		localeString: "en_US",
+		displayLanguage: "Shqip",
+		localeString: "sq_AL",
 	},
 	fetchPromise: function (p) {
 		let fp = get(
 			BrowserManager.getInstance().base +
-			"/oxanaui/app/locale/" +
+			"/obvia/examples/Translation/" +
 			p.localeString +
 			".json",
 			"application/json"
@@ -35,8 +35,10 @@ var myButton = new Container({
 				label: "Fixed Label",
 				classes: ["btn", "btn-success"],
 				click: function (e) {
-					console.log("From ClickAction");
-				},
+					Context.localizationManager.setSelectedLocale({
+						displayLanguage: "English",
+						localeString: "en_US",
+					});				},
 				bindingDefaultContext: Context,
 			},
 		},
@@ -47,7 +49,7 @@ var myButton = new Container({
 				type: "",
 				value: "",
 				label:
-					"{localizationManager.getLocaleString('Forms', 'successfullySaved', localizationManager.selectedLocale) + button1.label}",
+					"{localizationManager.getLocaleString('Forms', 'label', localizationManager.selectedLocale)}",
 				classes: ["btn", "btn-success"],
 				click: function (e) {
 					console.log("From ClickAction");

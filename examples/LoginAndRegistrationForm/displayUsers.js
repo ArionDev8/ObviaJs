@@ -6,153 +6,235 @@ import { Td } from "../../components/Table/Td.js";
 import { Label } from "../../components/Label.js";
 import { TBody } from "../../components/Table/TBody.js";
 import { Button } from "../../components/Button/Button.js";
+import { DropDown } from "../../components/DropDown/DropDown.js";
+import { ArrayEx } from "../../lib/ArrayEx.js";
+import { BrowserManager } from "../../lib/BrowserManager.js";
+import { LocalizationManager } from "../../lib/LocalizationManager.js";
+import { get } from "../../lib/my.js";
+import { Container } from "../../components/Container.js";
+
+let Context = {};
+Context.localizationManager = new LocalizationManager({
+    selectedLocale: {
+        displayLanguage: "English",
+        localeString: "en_US",
+    },
+    fetchPromise: function (p) {
+        let fp = get(
+            BrowserManager.getInstance().base +
+            "/obvia/examples/Translation/" +
+            p.localeString +
+            ".json",
+            "application/json"
+        );
+        return fp.then((r) => {
+            return JSON.parse(r.response);
+        });
+    },
+});
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
-var myUsersTable = new Table({
-    id: 'table',
-    css: {
-        width: '100%',
-        borderCollapse: 'collapse',
-        fontFamily: 'Arial, sans-serif',
-        margin: '20px 0'
-    },
+var myUsersTable = new Container({
+    id: 'container',
     components: [
         {
-            ctor: THead,
+            ctor: DropDown,
             props: {
-                id: 'thead',
+                id: 'dropdown',
                 css: {
-                    backgroundColor: '#f2f2f2',
+                    padding: '10px',
+                    border: '1px solid #ccc',
+                    borderRadius: '5px',
+                    backgroundColor: 'white',
+                    fontFamily: 'Arial, sans-serif',
+                    fontSize: '14px',
+                    width: '30%',
+                    float: 'right',
                 },
-                components: [
-                    {
-                        ctor: Tr,
-                        props: {
-                            components: [
-                                {
-                                    ctor: Th,
-                                    props: {
-                                        id: 'th',
-                                        css: {
-                                            border: '1px solid #ddd',
-                                            padding: '8px',
-                                            textAlign: 'left'
-                                        },
-                                        components: [
-                                            {
-                                                ctor: Label,
-                                                props: {
-                                                    label: "Name"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    ctor: Th,
-                                    props: {
-                                        id: 'th',
-                                        css: {
-                                            border: '1px solid #ddd',
-                                            padding: '8px',
-                                            textAlign: 'left'
-                                        },
-                                        components: [
-                                            {
-                                                ctor: Label,
-                                                props: {
-                                                    label: "Email"
-                                                }
-                                            }
-                                        ]
-                                    }
-                                },
-                                {
-                                    ctor: Th,
-                                    props: {
-                                        id: 'th',
-                                        css: {
-                                            border: '1px solid #ddd',
-                                            padding: '8px',
-                                            textAlign: 'left'
-                                        },
-                                        components: [
-                                            {
-                                                ctor: Label,
-                                                props: {
-                                                    label: ""
-                                                }
-                                            }
-                                        ]
-                                    }
-                                },
-                            ]
-                        }
-                    }
-                ]
+                valueField: "key",
+                labelField: "title",
+                label: "Choose Language",
+                dataProvider: new ArrayEx([
+                    { key: "en_US", title: "English" },
+                    { key: "sq_AL", title: "Shqip" },
+                ]),
+                change: function (e) {  
+                    let key = myUsersTable.dropdown.selectedItem.key;
+                    
+                    Context.localizationManager.setSelectedLocale({
+                        displayLanguage: "Shqip",
+                        localeString: key,
+                    });
+                }
             }
         },
         {
-            ctor: TBody,
+            ctor: Table,
             props: {
-                components: users.map(user => ({
-                    ctor: Tr,
-                    props: {
-                        components: [{
-                            ctor: Td,
-                            props: {
-                                css: {
-                                    border: '1px solid #ddd',
-                                    padding: '8px'
-                                },
-                                components: [{
-                                    ctor: Label,
+                css: {
+                    width: '100%',
+                    borderCollapse: 'collapse',
+                    fontFamily: 'Arial, sans-serif',
+                    margin: '20px 0',
+                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '5px',
+                },
+                components: [
+                    {
+                        ctor: THead,
+                        props: {
+                            id: 'thead',
+                            css: {
+                                backgroundColor: '#f2f2f2',
+                                borderBottom: '2px solid #ddd',
+                            },
+                            components: [
+                                {
+                                    ctor: Tr,
                                     props: {
-                                        label: user.name
+                                        components: [
+                                            {
+                                                ctor: Th,
+                                                props: {
+                                                    css: {
+                                                        border: '1px solid #ddd',
+                                                        padding: '12px',
+                                                        textAlign: 'left',
+                                                        fontWeight: 'bold',
+                                                        textTransform: 'uppercase',
+                                                    },
+                                                    components: [
+                                                        {
+                                                            ctor: Label,
+                                                            props: {
+                                                                label: "{localizationManager.getLocaleString('Forms','name',localizationManager.selectedLocale)}",
+                                                                bindingDefaultContext: Context
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                ctor: Th,
+                                                props: {
+                                                    css: {
+                                                        border: '1px solid #ddd',
+                                                        padding: '12px',
+                                                        textAlign: 'left',
+                                                        fontWeight: 'bold',
+                                                        textTransform: 'uppercase',
+                                                    },
+                                                    components: [
+                                                        {
+                                                            ctor: Label,
+                                                            props: {
+                                                                label: "Email",
+                                                                bindingDefaultContext: Context
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                ctor: Th,
+                                                props: {
+                                                    css: {
+                                                        border: '1px solid #ddd',
+                                                        padding: '12px',
+                                                        textAlign: 'left',
+                                                        fontWeight: 'bold',
+                                                        textTransform: 'uppercase',
+                                                    },
+                                                    components: [
+                                                        {
+                                                            ctor: Label,
+                                                            props: {
+                                                                label: "",
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                        ]
                                     }
-                                }]
-                            }
-                        },
-                        {
-                            ctor: Td,
-                            props: {
-                                css: {
-                                    border: '1px solid #ddd',
-                                    padding: '8px'
-                                },
-                                components: [{
-                                    ctor: Label,
-                                    props: {
-                                        label: user.email
-                                    }
-                                }]
-                            }
-                        },
-                        {
-                            ctor: Td,
-                            props: {
-                                components: [{
-                                    ctor: Button,
-                                    props: {
-                                        id: 'editButton',
-                                        type: 'button',
-                                        label: 'Edit',
-                                        css: {
-                                            height: 50,
-                                            width: '100%',
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        ctor: TBody,
+                        props: {
+                            components: users.map(user => ({
+                                ctor: Tr,
+                                props: {
+                                    components: [
+                                        {
+                                            ctor: Td,
+                                            props: {
+                                                css: {
+                                                    border: '1px solid #ddd',
+                                                    padding: '12px',
+                                                    verticalAlign: 'top',
+                                                },
+                                                components: [{
+                                                    ctor: Label,
+                                                    props: {
+                                                        label: user.name,
+                                                    }
+                                                }]
+                                            }
                                         },
-                                        click: function() {
-                                            location.href = `./editUser.html?email=${encodeURIComponent(user.email)}`;
-                                        }
-                                    }
-                                }]
-                            }
-                        },
-                        ]
+                                        {
+                                            ctor: Td,
+                                            props: {
+                                                css: {
+                                                    border: '1px solid #ddd',
+                                                    padding: '12px',
+                                                    verticalAlign: 'top',
+                                                },
+                                                components: [{
+                                                    ctor: Label,
+                                                    props: {
+                                                        label: user.email,
+                                                    }
+                                                }]
+                                            }
+                                        },
+                                        {
+                                            ctor: Td,
+                                            props: {
+                                                components: [{
+                                                    ctor: Button,
+                                                    props: {
+                                                        id: 'editButton',
+                                                        type: 'button',
+                                                        label: "{localizationManager.getLocaleString('Forms','editBtn',localizationManager.selectedLocale)}",
+                                                        css: {
+                                                            height: '40px',
+                                                            width: '100%',
+                                                            backgroundColor: '#007bff',
+                                                            color: 'white',
+                                                            border: 'none',
+                                                            borderRadius: '5px',
+                                                            cursor: 'pointer',
+                                                        },
+                                                        click: function() {
+                                                            location.href = `./editUser.html?email=${encodeURIComponent(user.email)}`;
+                                                        },
+                                                        bindingDefaultContext: Context,
+                                                    }
+                                                }]
+                                            }
+                                        },
+                                    ]
+                                }
+                            }))
+                        }
                     }
-                }))
-            }
+                ]
+            },
+            
         }
     ]
 });
@@ -161,4 +243,4 @@ myUsersTable.render().then(function (cmpInstance) {
     $('#root').append(cmpInstance.$el);
 });
 
-export { myUsersTable }
+export { myUsersTable };

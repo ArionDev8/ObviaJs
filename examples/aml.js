@@ -12,9 +12,8 @@
 import { myRegistrationForm } from "./LoginAndRegistrationForm/registration.js";
 
 
-
 import { rjs } from "/obvia/lib/rjs.js";
  
 rjs.define("/obvia/lib/yaml.js", "yaml");
-rjs.define("/examples/LoginAndRegistrationForm/registration.js", "myRegistrationForm");
+rjs.define("/obvia/examples/LoginAndRegistrationForm/registration.js", "myRegistrationForm");
 // rjs.define("/examples/LoginAndRegistrationForm/login.js", "myLoginForm");

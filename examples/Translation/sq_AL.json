@@ -1,0 +1,18 @@
+{
+    "locale": "sq_AL",
+    "sections": {
+        "Forms": {
+        "label": "shqip",
+        "registerBtn": "Regjistrohu",
+        "logInBtn": "Logohu",
+        "editBtn": "Modifiko",
+        "name": "Emri",
+        "password": "Fjalekalimi",
+        "changePasswordBtn": "Ndrysho fjalekalimin",
+        "changePasswordLabel": "Ndryshim fjalekalimi",
+        "saveBtn": "Ruaj",
+        "forgotPasswordLink": "Harruat fjalekalimin",
+        "newPassword": "Fjalekalim i ri"
+    }
+    }
+}

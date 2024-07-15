@@ -8,9 +8,13 @@
 // import { myRepeater } from "./examples/Repeater/example.js";
 // import { myAutoBrowser } from "./examples/Autobrowse/example.js";
 // import { mySideNav } from "/obvia/examples/SideNav/example.js";
-import { myHorizontalNav } from "./NavBarHorizontal/example.js";
+// import { myHorizontalNav } from "./NavBarHorizontal/example.js";
+import { myRegistrationForm } from "./LoginAndRegistrationForm/registration.js";
+
+
 
 import { rjs } from "/obvia/lib/rjs.js";
  
 rjs.define("/obvia/lib/yaml.js", "yaml");
-rjs.define("/examples/NavBarHorizontal/example.js", "myHorizontalNav");
+rjs.define("/examples/LoginAndRegistrationForm/registration.js", "myRegistrationForm");
+// rjs.define("/examples/LoginAndRegistrationForm/login.js", "myLoginForm");

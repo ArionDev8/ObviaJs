@@ -24,7 +24,8 @@ apiClient.get("https://api.mocki.io/v1/83a89b16").then(r => {
             "favoriteFruit": "Kiwi",
             "selectedFavoriteFruit": null
         },
-        columns: [{
+        columns: [
+            {
             width: 400,
             name: "name",
             field: "name",

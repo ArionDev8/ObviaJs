@@ -60,14 +60,6 @@ let passwordResetForm = new Container({
                     { key: "en_US", title: "English" },
                     { key: "sq_AL", title: "Shqip" },
                 ]),
-                change: function (e) {  
-                    let key = passwordResetForm.dropdown.selectedItem.key;
-                    
-                    Context.localizationManager.setSelectedLocale({
-						displayLanguage: "Shqip",
-						localeString: key,
-					});
-                }
             }
         },
         {
@@ -127,23 +119,6 @@ let passwordResetForm = new Container({
                     cursor: 'pointer',
                     width: '100%',
                     height: '50px',
-                },
-                click: function () {
-                    let email = passwordResetForm.email.value;
-                    let newPassword = passwordResetForm.password.value;
-
-                    let users = JSON.parse(localStorage.getItem('users')) || [];
-                    let userIndex = users.findIndex(user => user.email === email);
-
-                    if (userIndex !== -1) {
-                        users[userIndex].password = newPassword;
-                        localStorage.setItem('users', JSON.stringify(users));
-                        location.href = './login.html';
-
-                        console.log("Successfully changed password");
-                    } else {
-                        console.log("User not found or failed to change password");
-                    }
                 },
                 bindingDefaultContext: Context,
             }

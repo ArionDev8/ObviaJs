@@ -1,0 +1,105 @@
+{
+    "ctor" : "Container",
+    "id": "formForEdit",
+    "css": {
+        "display": "flex",
+        "flexDirection": "column",
+        "gap": "10px",
+        "width": "50%"
+    },
+    "props": {
+        "components": [
+            {
+                "ctor": "DropDown",
+                "props": {
+                    "id": "dropdown",
+                    "valueField": "key",
+                    "css": {
+                        "padding": "10px",
+                        "border": "1px solid #ccc",
+                        "borderRadius": "5px",
+                        "backgroundColor": "white",
+                        "fontFamily": "Arial, sans-serif",
+                        "fontSize": "14px",
+                        "width": "30%",
+                        "float": "right"
+                    },
+                    "labelField": "title",
+                    "label": "Choose Language",
+                    "dataProvider": [
+    
+                        { "key": "en_US", "title": "English" },
+                        { "key": "sq_AL", "title": "Shqip" }
+                    ]
+                }
+            },
+            {
+                "ctor": "TextInput",
+                "props": {
+                    "id": "name",
+                    "type": "text",
+                    "placeholder": "{localizationManager.getLocaleString('Forms','name',localizationManager.selectedLocale)}",
+                    "value": "",
+                    "css": {
+                        "padding": "10px",
+                        "border": "1px solid #ccc",
+                        "borderRadius": "5px",
+                        "fontSize": "20px",
+                        "width": "100%"
+                    }
+                }
+            },
+            {
+                "ctor": "TextInput",
+                "props": {
+                    "id": "email",
+                    "type": "text",
+                    "placeholder": "Email",
+                    "value": "",
+                    "css": {
+                        "padding": "10px",
+                        "border": "1px solid #ccc",
+                        "borderRadius": "5px",
+                        "fontSize": "20px",
+                        "width": "100%"
+                    }
+                }
+            },
+            {
+                "ctor": "TextInput",
+                "props": {
+                    "id": "password",
+                    "type": "password",
+                    "placeholder": "{localizationManager.getLocaleString('Forms','password',localizationManager.selectedLocale)}",
+                    "value": "",
+                    "css": {
+                        "padding": "10px",
+                        "border": "1px solid #ccc",
+                        "borderRadius": "5px",
+                        "fontSize": "20px",
+                        "width": "100%"
+                    }
+                }
+            },
+            {
+                "ctor": "Button",
+                "props": {
+                    "id": "editButton",
+                    "type": "button",
+                    "label": "{localizationManager.getLocaleString('Forms','saveBtn',localizationManager.selectedLocale)}",
+                    "css": {
+                        "padding": "10px",
+                        "border": "none",
+                        "borderRadius": "5px",
+                        "backgroundColor": "#008CBA",
+                        "color": "white",
+                        "fontSize": "16px",
+                        "cursor": "pointer",
+                        "width": "100%",
+                        "height": "50px"
+                    }
+                }
+            }
+        ]
+    }
+}

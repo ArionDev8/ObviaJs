@@ -23,29 +23,19 @@ window.localizationManager = Context.localizationManager = await new Localizatio
 });
 
 
-let user = {
-    name: '',
-    email: '',
-    password: '',
-}
-
-let registration = function (applet) {
-    let _registerBtn;
-    let _logInBtn;
-    let _name;
-    let _email;
-    let _password;
+let passwordReset = function(applet) {
     let _dropdown;
+    let _email;
+    let _newPassword;
+    let _button;
 
     let imp = {
-        END_DRAW: function () {
-            _registerBtn = applet.find('registerButton');
-            _logInBtn = applet.find('logInButton');
-            _name = applet.find('name');
-            _email = applet.find('email');
-            _password = applet.find('password');
+        END_DRAW : function() {
             _dropdown = applet.find('dropdown');
-            
+            _email = applet.find('email');
+            _newPassword = applet.find('password');
+            _button = applet.find('ChangePasswordButton');
+
             applet.addBehaviors(
                 _dropdown,
                 {
@@ -55,17 +45,9 @@ let registration = function (applet) {
             )
 
             applet.addBehaviors(
-                _registerBtn,
+                _button,
                 {
-                    click: "REGISTER",
-                },
-                false
-            )
-
-            applet.addBehaviors(
-                _logInBtn,
-                {
-                    click: "REDIRECT",
+                    click: "RESET_PASSWORD",
                 },
                 false
             )
@@ -80,36 +62,24 @@ let registration = function (applet) {
             });
         },
 
-        REGISTER: function () {
-            user.name = _name.value.trim();
-            user.email = _email.value.trim();
-            user.password = _password.value.trim();
-
-            if (!user.name && !user.email && !user.password) {
-                alert('All fields are required.');
-                return;
-            }
+        RESET_PASSWORD: function () {
+            let email = _email.value;
+            let newPassword = _newPassword.value;
 
             let users = JSON.parse(localStorage.getItem('users')) || [];
+            let userIndex = users.findIndex(user => user.email === email);
 
-            let emailExists = users.some(existingUser => existingUser.email === user.email);
-
-            if (emailExists) {
-                alert('This email is already registered. Please use a different email.');
-            } else {
-                users.push(user);
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
                 localStorage.setItem('users', JSON.stringify(users));
+                console.log("Successfully changed password");
+            } else {
+                console.log("User not found or failed to change password");
             }
         },
-
-        REDIRECT: function () {
-            applet.app.appletsMap["login"][0].initApplet();
-        }
     }
 
     return imp;
 }
 
-
-export { registration };
-
+export { passwordReset };

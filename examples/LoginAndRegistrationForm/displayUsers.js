@@ -8,30 +8,6 @@ import { TBody } from "../../components/Table/TBody.js";
 import { Button } from "../../components/Button/Button.js";
 import { DropDown } from "../../components/DropDown/DropDown.js";
 import { ArrayEx } from "../../lib/ArrayEx.js";
-import { BrowserManager } from "../../lib/BrowserManager.js";
-import { LocalizationManager } from "../../lib/LocalizationManager.js";
-import { get } from "../../lib/my.js";
-import { Container } from "../../components/Container.js";
-
-let Context = {};
-Context.localizationManager = new LocalizationManager({
-    selectedLocale: {
-        displayLanguage: "English",
-        localeString: "en_US",
-    },
-    fetchPromise: function (p) {
-        let fp = get(
-            BrowserManager.getInstance().base +
-            "/obvia/examples/Translation/" +
-            p.localeString +
-            ".json",
-            "application/json"
-        );
-        return fp.then((r) => {
-            return JSON.parse(r.response);
-        });
-    },
-});
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -59,14 +35,7 @@ var myUsersTable = new Container({
                     { key: "en_US", title: "English" },
                     { key: "sq_AL", title: "Shqip" },
                 ]),
-                change: function (e) {  
-                    let key = myUsersTable.dropdown.selectedItem.key;
-                    
-                    Context.localizationManager.setSelectedLocale({
-                        displayLanguage: "Shqip",
-                        localeString: key,
-                    });
-                }
+                
             }
         },
         {

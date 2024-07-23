@@ -5,6 +5,7 @@
  */
 import { Parent } from "/obvia/components/base/Parent.js";
 import { ObjectUtils } from "/obvia/lib/ObjectUtils.js";
+import { DependencyContainer } from "/obvia/lib/DependencyContainer.js";
 
 var THead = function (_props)
 {
@@ -39,6 +40,7 @@ var THead = function (_props)
     return r;
 };
 THead.prototype.ctor = 'THead';
+DependencyContainer.getInstance().register("THead", THead, DependencyContainer.simpleResolve);
 export
 {
     THead

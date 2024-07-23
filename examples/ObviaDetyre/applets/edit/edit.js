@@ -23,29 +23,22 @@ window.localizationManager = Context.localizationManager = await new Localizatio
 });
 
 
-let user = {
-    name: '',
-    email: '',
-    password: '',
-}
-
-let registration = function (applet) {
-    let _registerBtn;
-    let _logInBtn;
+let edit = function (applet) {
+    let _dropdown;
     let _name;
     let _email;
     let _password;
-    let _dropdown;
+    let _button;
 
     let imp = {
-        END_DRAW: function () {
-            _registerBtn = applet.find('registerButton');
-            _logInBtn = applet.find('logInButton');
+   
+        END_DRAW : function(){
+            _dropdown = applet.find('dropdown');
             _name = applet.find('name');
             _email = applet.find('email');
             _password = applet.find('password');
-            _dropdown = applet.find('dropdown');
-            
+            _button = applet.find('editButton');
+
             applet.addBehaviors(
                 _dropdown,
                 {
@@ -55,23 +48,15 @@ let registration = function (applet) {
             )
 
             applet.addBehaviors(
-                _registerBtn,
+                _button,
                 {
-                    click: "REGISTER",
-                },
-                false
-            )
-
-            applet.addBehaviors(
-                _logInBtn,
-                {
-                    click: "REDIRECT",
+                    click: "EDIT",
                 },
                 false
             )
         },
 
-        CHANGE_LANGUAGE: function () {
+        CHANGE_LANGUAGE: function (e) {
             let key = _dropdown.selectedItem.key;
 
             Context.localizationManager.setSelectedLocale({
@@ -80,36 +65,24 @@ let registration = function (applet) {
             });
         },
 
-        REGISTER: function () {
-            user.name = _name.value.trim();
-            user.email = _email.value.trim();
-            user.password = _password.value.trim();
-
-            if (!user.name && !user.email && !user.password) {
-                alert('All fields are required.');
-                return;
-            }
+        EDIT: function () {
+            let updatedName = _name.value;
+            let email = _email.value;
+            let updatedPassword = _password.value;
 
             let users = JSON.parse(localStorage.getItem('users')) || [];
+            let userExists = users.find(user => user.email === email);
 
-            let emailExists = users.some(existingUser => existingUser.email === user.email);
-
-            if (emailExists) {
-                alert('This email is already registered. Please use a different email.');
-            } else {
-                users.push(user);
+            if (userExists) {
+                users = users.map(u => u.email === email ? { name: updatedName, email: u.email, password: updatedPassword } : u);
                 localStorage.setItem('users', JSON.stringify(users));
+                alert('User information updated successfully.');
+            } else {
+                alert('Email not found. Please check the email address.');
             }
-        },
-
-        REDIRECT: function () {
-            applet.app.appletsMap["login"][0].initApplet();
         }
     }
-
     return imp;
 }
 
-
-export { registration };
-
+export { edit };

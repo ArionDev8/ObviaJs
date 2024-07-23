@@ -67,14 +67,6 @@ let myEditForm = new Container({
                     { key: "en_US", title: "English" },
                     { key: "sq_AL", title: "Shqip" },
                 ]),
-                change: function (e) {
-                    let key = myEditForm.dropdown.selectedItem.key;
-
-                    Context.localizationManager.setSelectedLocale({
-                        displayLanguage: "Shqip",
-                        localeString: key,
-                    });
-                }
             }
         },
         {
@@ -143,15 +135,7 @@ let myEditForm = new Container({
                     width: '100%',
                     height: '50px',
                 },
-                click: function () {
-                    let updatedName = myEditForm.name.value;
-                    let updatedPassword = myEditForm.password.value;
-
-                    let users = JSON.parse(localStorage.getItem('users'));
-                    users = users.map(u => u.email === email ? { name: updatedName, email: u.email, password: updatedPassword } : u);
-                    localStorage.setItem('users', JSON.stringify(users));
-                    location.href = './displayUsers.html';
-                },
+                
                 bindingDefaultContext: Context,
             }
         }

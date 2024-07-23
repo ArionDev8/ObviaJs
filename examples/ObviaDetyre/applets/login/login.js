@@ -1,14 +1,14 @@
 import { BrowserManager } from "/obvia/lib/BrowserManager.js";
-import { LocalizationManager } from "../../lib/LocalizationManager.js";
+import { LocalizationManager } from "/obvia/lib/LocalizationManager.js";
 import { get } from "/obvia/lib/my.js";
 
 let Context = {};
-Context.localizationManager = new LocalizationManager({
+window.localizationManager = Context.localizationManager = await new LocalizationManager({
     selectedLocale: {
         displayLanguage: "English",
         localeString: "en_US",
     },
-    fetchPromise: function (p) {
+    fetchPromise: async function (p) {
         let fp = get(
             BrowserManager.getInstance().base +
             "/obvia/examples/Translation/" +
@@ -19,35 +19,24 @@ Context.localizationManager = new LocalizationManager({
         return fp.then((r) => {
             return JSON.parse(r.response);
         });
-    },
+    },  
 });
-// import { Cache } from "../../lib/cache/Cache.js"
 
-// let cache = Cache.getInstance();
-
-let user = {
-    name: '',
-    email: '',
-    password: '',
-}
-
-const myRegistrationForm = function (applet) {
-    let _registerBtn;
+let login = function (applet) {
+    let _dropdown;
     let _logInBtn;
-    let _name;
     let _email;
     let _password;
-    let _dropdown;
+    let _passwordResetLink;
 
     let imp = {
-        END_DRAW: function () {
-            _registerBtn = applet.find('registerButton');
+
+        END_DRAW: function(){
+            _dropdown = applet.find('dropdown');
             _logInBtn = applet.find('logInButton');
-            _name = applet.find('name');
             _email = applet.find('email');
             _password = applet.find('password');
-            _dropdown = applet.find('dropdown');
-
+            _passwordResetLink = applet.find('passwordResetLink');
 
             applet.addBehaviors(
                 _dropdown,
@@ -58,17 +47,17 @@ const myRegistrationForm = function (applet) {
             )
 
             applet.addBehaviors(
-                _registerBtn,
+                _logInBtn,
                 {
-                    click: "REGISTER",
+                    click: "LOG_IN",
                 },
                 false
             )
 
             applet.addBehaviors(
-                _logInBtn,
+                _passwordResetLink,
                 {
-                    click: "LOGIN",
+                    click: "PASSWORD_RESET_REDIRECT"
                 },
                 false
             )
@@ -83,30 +72,28 @@ const myRegistrationForm = function (applet) {
             });
         },
 
-        REGISTER: function () {
-            user.name = _name.value;
-            user.email = _email.value;
-            user.password = _password.value;
+        LOG_IN: function () {
+            let email = _email.value;
+            let password = _password.value;
 
             let users = JSON.parse(localStorage.getItem('users')) || [];
+            let user = users.find(user => user.email === email && user.password === password);
 
-            let emailExists = users.some(existingUser => existingUser.email === user.email);
-
-            if (emailExists) {
-                alert('This email is already registered. Please use a different email.');
+            if (user) {
+                console.log("Successfully logged in");
+                applet.app.appletsMap["table"][0].initApplet();
             } else {
-                users.push(user);
-                localStorage.setItem('users', JSON.stringify(users));
-                // alert('Registration successful!');
+                console.log("Failed to log in");
             }
         },
 
-        REDIRECT: function () {
-            location.href = './login.html';
+        PASSWORD_RESET_REDIRECT: function() {
+            applet.app.appletsMap["passwordReset"][0].initApplet();
         }
+
     }
 
     return imp;
 }
-myRegistrationForm.ctor = "myRegistrationForm"
-export { myRegistrationForm }
+
+export { login }

@@ -7,6 +7,7 @@
 //component definition
 import { TCell } from "/obvia/components/Table/TCell.js";
 import { ObjectUtils } from "/obvia/lib/ObjectUtils.js";
+import { DependencyContainer } from "/obvia/lib/DependencyContainer.js";
 
 var Td = function (_props)
 {
@@ -41,6 +42,7 @@ var Td = function (_props)
     return r;
 };
 Td.prototype.ctor = 'Td';
+DependencyContainer.getInstance().register("Td", Td, DependencyContainer.simpleResolve);
 export
 {
     Td

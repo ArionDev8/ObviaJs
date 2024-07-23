@@ -1,0 +1,110 @@
+{
+    "ctor": "Container",
+    "id": "container",
+    "props": {
+        "components": [
+            {
+                "ctor": "DropDown",
+                "props": {
+                    "id": "dropdown",
+                    "css": {
+                        "padding": "10px",
+                        "border": "1px solid #ccc",
+                        "borderRadius": "5px",
+                        "backgroundColor": "white",
+                        "fontFamily": "Arial, sans-serif",
+                        "fontSize": "14px",
+                        "width": "30%",
+                        "float": "right"
+                    },
+                    "valueField": "key",
+                    "labelField": "title",
+                    "label": "Choose Language",
+                    "dataProvider": [
+                        {
+                            "key": "en_US",
+                            "title": "English"
+                        },
+                        {
+                            "key": "sq_AL",
+                            "title": "Shqip"
+                        }
+                    ]
+                }
+            },
+            {
+                "ctor": "DataGrid",
+                "props": {
+                    "columns": [
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description":  "{localizationManager.getLocaleString('Forms','name',localizationManager.selectedLocale)}",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "name",
+                            "visible": true
+                        },
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description": " Email ",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "email",
+                            "visible": true
+                        },
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description": "{localizationManager.getLocaleString('Forms','saveBtn',localizationManager.selectedLocale)}",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "email",
+                            "visible": true,
+                            "itemRenderer": {
+                                "ctor": "Button",
+                                "id": "editBtn",
+                                "props": {
+                                    "id": "fa",
+                                    "labelType": "i",   
+                                    "label":"{localizationManager.getLocaleString('Forms','editBtn',localizationManager.selectedLocale)}"
+                                }
+                            }
+                        }
+                    ],
+                    "multiSelect": false,
+                    "components": [],
+                    "editPosition": null,
+                    "bindingExpressions": [],
+                    "rendering": {
+                        "direction": "vertical",
+                        "separator": true,
+                        "wrap": true,
+                        "mode": "append",
+                        "actions": false
+                    },
+                    "dataProvider": [],
+                    "sortChildren": false,
+                    "id": "grid",
+                    "attr": {
+                        "data-triggers": "rowAdd rowEdit beforeRowAdd rowDelete beforeRowDelete dataProviderLengthChanged cellEditFinished cellEditStarted cellEdit rowClick rowDblClick cellStyling rowStyling",
+                        "isCmp": true
+                    },
+                    "height": "calc(100vh - 260px)",
+                    "defaultRowHeight": 40,
+                    "newRowOnEnter": false,
+                    "visible": true,
+                    "enabled": true,
+                    "classes": [
+                        "mt-4",
+                        "mb-2"
+                    ]
+                }
+            }
+        ]
+    }
+}

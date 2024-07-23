@@ -9,25 +9,6 @@ import { LocalizationManager } from "../../lib/LocalizationManager.js";
 import { get } from "../../lib/my.js";
 
 
-let Context = {};
-Context.localizationManager = new LocalizationManager({
-    selectedLocale: {
-        displayLanguage: "English",
-        localeString: "en_US",
-    },
-    fetchPromise: function (p) {
-        let fp = get(
-            BrowserManager.getInstance().base +
-            "/obvia/examples/Translation/" +
-            p.localeString +
-            ".json",
-            "application/json"
-        );
-        return fp.then((r) => {
-            return JSON.parse(r.response);
-        });
-    },
-});
 
 let myLoginForm = new Container({
     id: 'formForLogin',
@@ -60,14 +41,6 @@ let myLoginForm = new Container({
                     { key: "en_US", title: "English" },
                     { key: "sq_AL", title: "Shqip" },
                 ]),
-                change: function (e) {
-                    let key = myLoginForm.dropdown.selectedItem.key;
-
-                    Context.localizationManager.setSelectedLocale({
-                        displayLanguage: "Shqip",
-                        localeString: key,
-                    });
-                }
             }
         },
         {
@@ -129,20 +102,6 @@ let myLoginForm = new Container({
                     cursor: 'pointer',
                     width: '100%',
                     height: '50px',
-                },
-                click: function () {
-                    let email = myLoginForm.email.value;
-                    let password = myLoginForm.password.value;
-
-                    let users = JSON.parse(localStorage.getItem('users')) || [];
-                    let user = users.find(user => user.email === email && user.password === password);
-
-                    if (user) {
-                        console.log("Successfully logged in");
-                        location.href = './displayUsers.html';
-                    } else {
-                        console.log("Failed to log in");
-                    }
                 },
                 bindingDefaultContext: Context,
             }

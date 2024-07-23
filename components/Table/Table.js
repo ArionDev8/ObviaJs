@@ -6,6 +6,7 @@
 
 import { Parent } from "/obvia/components/base/Parent.js";
 import { ObjectUtils } from "/obvia/lib/ObjectUtils.js";
+import { DependencyContainer } from "/obvia/lib/DependencyContainer.js";
 
 var Table = function (_props)
 {
@@ -40,6 +41,7 @@ var Table = function (_props)
     return r;
 };
 Table.prototype.ctor = 'Table';
+DependencyContainer.getInstance().register("Table", Table, DependencyContainer.simpleResolve);
 export
 {
     Table

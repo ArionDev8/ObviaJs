@@ -1,0 +1,79 @@
+{
+    "ctor": "Container",
+    "props": {
+        "id": "container",
+        "components": [
+            {
+                "ctor": "Label",
+                "props": {
+                    "id": "Lista e perdoruesve",
+                    "label": "Lista e perdoruesve"
+                }
+            },
+            {
+                "ctor": "DataGrid",
+                "props": {
+                    "columns": [
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description":  "ID",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "id",
+                            "visible": true
+                        },
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description":  "Name",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "name",
+                            "visible": true
+                        },
+                        {
+                            "width": 300,
+                            "calculatedWidth": null,
+                            "description": " Email ",
+                            "sortOrder": 0,
+                            "sortDirection": "ASC",
+                            "sortable": true,
+                            "field": "email",
+                            "visible": true
+                        }
+                    ],
+                    "multiSelect": false,
+                    "components": [],
+                    "editPosition": null,
+                    "bindingExpressions": [],
+                    "rendering": {
+                        "direction": "vertical",
+                        "separator": true,
+                        "wrap": true,
+                        "mode": "append",
+                        "actions": false
+                    },
+                    "dataProvider": [],
+                    "sortChildren": false,
+                    "id": "grid",
+                    "attr": {
+                        "data-triggers": "rowAdd rowEdit beforeRowAdd rowDelete beforeRowDelete dataProviderLengthChanged cellEditFinished cellEditStarted cellEdit rowClick rowDblClick cellStyling rowStyling",
+                        "isCmp": true
+                    },
+                    "height": "calc(100vh - 260px)",
+                    "defaultRowHeight": 40,
+                    "newRowOnEnter": false,
+                    "visible": true,
+                    "enabled": true,
+                    "classes": [
+                        "mt-4",
+                        "mb-2"
+                    ]
+                }
+            }
+        ]
+    }
+}

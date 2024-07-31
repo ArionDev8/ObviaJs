@@ -1,0 +1,203 @@
+{
+    "ctor": "Container",
+    "id": "MainLayout",
+    "props": {
+        "css": {
+            "display": "flex",
+            "height": "100vh",
+            "marginLeft": "0px"
+        },
+        "classes": ["col-12"],
+        "components": [
+            {
+                "ctor": "Container",
+                "id": "SideMenu",
+                "props": {
+                    "css": {
+                        "height": "100vh",
+                        "backgroundColor": "#2c3e50",
+                        "color": "#ecf0f1",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "alignItems": "center",
+                        "boxShadow": "2px 0 5px rgba(0, 0, 0, 0.1)",
+                        "marginLeft": "0px",
+                        "padding": "20px"
+                    },
+                    "classes": ["col-2"],
+                    "components": [
+                        {
+                            "ctor": "Container",
+                            "props": {
+                                "css": {
+                                    "display": "flex",
+                                    "flexDirection": "column",
+                                    "width": "100%",
+                                    "gap": "25px",
+                                    "marginTop": "20px",
+                                    "justifyContent": "center",
+                                    "alignItems":"center"
+                                },
+                                "components": [
+                                    {
+                                        "ctor": "Container",
+                                        "props": {
+                                            "css": {
+                                                "display": "flex",
+                                                "alignItems": "baseline",
+                                                "gap": "15px"
+                                            },
+                                            "components": [
+                                                {
+                                                    "ctor": "Label",
+                                                    "props": {
+                                                        "label": "",
+                                                        "classes": [
+                                                            "fas",
+                                                            "fa-home"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "ctor": "Link",
+                                                    "props": {
+                                                        "label": "Home",
+                                                        "href": "#nav#home",
+                                                        "css": {
+                                                            "color": "#ecf0f1",
+                                                            "fontSize": "16px",
+                                                            "textDecoration": "none",
+                                                            "transition": "color 0.3s"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "ctor": "Container",
+                                        "props": {
+                                            "css": {
+                                                "display": "flex",
+                                                "alignItems": "baseline",
+                                                "gap": "15px"
+                                            },
+                                            "components": [
+                                                {
+                                                    "ctor": "Label",
+                                                    "props": {
+                                                        "label": "",
+                                                        "classes": [
+                                                            "fas",
+                                                            "fa-building"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "ctor": "Link",
+                                                    "props": {
+                                                        "label": "About Us",
+                                                        "href": "#nav#aboutUs",
+                                                        "css": {
+                                                            "color": "#ecf0f1",
+                                                            "fontSize": "16px",
+                                                            "textDecoration": "none",
+                                                            "transition": "color 0.3s"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "ctor": "Container",
+                                        "props": {
+                                            "css": {
+                                                "display": "flex",
+                                                "alignItems": "baseline",
+                                                "gap": "15px"
+                                            },
+                                            "components": [
+                                                {
+                                                    "ctor": "Label",
+                                                    "props": {
+                                                        "label": "",
+                                                        "classes": [
+                                                            "fas",
+                                                            "fa-users"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "ctor": "Link",
+                                                    "props": {
+                                                        "label": "Users",
+                                                        "href": "#nav#users",
+                                                        "css": {
+                                                            "color": "#ecf0f1",
+                                                            "fontSize": "16px",
+                                                            "textDecoration": "none",
+                                                            "transition": "color 0.3s"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "ctor": "Container",
+                                        "props": {
+                                            "css": {
+                                                "display": "flex",
+                                                "alignItems": "baseline",
+                                                "gap": "15px"
+                                            },
+                                            "components": [
+                                                {
+                                                    "ctor": "Label",
+                                                    "props": {
+                                                        "label": "",
+                                                        "classes": [
+                                                            "fas",
+                                                            "fa-tasks"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "ctor": "Link",
+                                                    "props": {
+                                                        "label": "Projects",
+                                                        "href": "#nav#projects",
+                                                        "css": {
+                                                            "color": "#ecf0f1",
+                                                            "fontSize": "16px",
+                                                            "textDecoration": "none",
+                                                            "transition": "color 0.3s"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "ctor": "Container",
+                "props": {
+                    "id": "mainContainer",
+                    "css": {
+                        "padding": "20px",
+                        "backgroundColor": "#f5f5f5",
+                        "overflow": "auto"
+                    },
+                    "classes": ["col-10"],
+                    "components": []
+                }
+            }
+        ]
+    }
+}

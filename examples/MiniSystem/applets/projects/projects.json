@@ -1,0 +1,72 @@
+{
+    "ctor": "Container",
+    "props": {
+        "id": "container",
+        "components": [
+            {
+                "ctor": "Label",
+                "props": {
+                    "id": "Lista e projekteve",
+                    "label": "List of solutions"
+                }
+            },
+            {
+                "ctor": "List",
+                "props": {
+                    "id": "listOfUsers",
+                    "multiselect": true,
+                    "css": {
+                        "marginTop": "20px",
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "gap": "4px"
+                    },
+                    "dataProvider": [
+                        {
+                            "id": "1",
+                            "name": "Automotive",
+                            "href": "https://www.kreatx.com/solutions/automotive/"
+                        },
+                        {
+                            "id": "2",
+                            "name": "Construction Engineering",
+                            "href": "https://www.kreatx.com/solutions/construction-engineering/"
+                        },
+                        {
+                            "id": "3",
+                            "name": "Communications",
+                            "href": "https://www.kreatx.com/solutions/communications/"
+                        },
+                        {
+                            "id": "4",
+                            "name": "Financial",
+                            "href": "https://www.kreatx.com/solutions/financial/"
+                        },
+                        {
+                            "id": "5",
+                            "name": "Public Sector",
+                            "href": "https://www.kreatx.com/solutions/public-sector/"
+                        }
+                    ],
+                    "valueField": "id",
+                    "value": [
+                        {
+                            "id": "1"
+                        }
+                    ],
+                    "components": [
+                        {
+                            "ctor": "Link",
+                            "props": {
+                                "id": "labelName",
+                                "value": "{id}",
+                                "label": "{name}",
+                                "href": "{href}"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
